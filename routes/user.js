@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.get("/", (req, res) => {
+//router.use(mylogger);
+
+//router.get("/", (req, res) => {
+router.get("/", mylogger, (req, res) => {
     res.send("ユーザです");
 });
 
@@ -12,5 +15,11 @@ router.get("/info", (req, res) => {
 router.get("/:id", (req, res) => {
     res.send(`${req.params.id}のユーザ情報を取得しました`);
 });
+
+//ミドルウェア
+function mylogger(req, res, next) {
+    console.log(req.originalUrl);
+    next();
+}
 
 module.exports = router;

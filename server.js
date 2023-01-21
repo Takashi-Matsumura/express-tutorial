@@ -4,7 +4,10 @@ const userRouter = require("./routes/user");
 
 const PORT = 3000;
 
-//app.use(express.static("public"));
+//ロガーを挟む場所は、先頭へ
+//app.use(mylogger);
+
+//app.use(express.static("public")); //静的ファイル
 app.set("view engine", "ejs"); //EJSテンプレートエンジン
 
 app.get("/", (req, res) => {
@@ -22,5 +25,11 @@ app.use("/user", userRouter);
 //app.use("/auth", authRouter);
 //app.use("/customer", customerRouter);
 //app.use("/product", productRouter);
+
+//ミドルウェア
+//function mylogger(req, res, next) {
+//    console.log(req.originalUrl);
+//    next();
+//}
 
 app.listen(PORT, () => console.log("サーバが起動しました"));
