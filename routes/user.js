@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-//router.use(mylogger);
-
-//router.get("/", (req, res) => {
 router.get("/", mylogger, (req, res) => {
     res.send("ユーザです");
 });

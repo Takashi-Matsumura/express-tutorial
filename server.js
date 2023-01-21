@@ -1,35 +1,28 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
+
 const userRouter = require("./routes/user");
+const customerRouter = require("./routes/customer");
 
 const PORT = 3000;
 
-//ロガーを挟む場所は、先頭へ
-//app.use(mylogger);
+//お客様情報
+const customers = [
+    { name: "田中", id: 1 },
+    { name: "山田", id: 2 },
+    { name: "鈴木", id: 3 },
+    { name: "橋本", id: 4 },
+];
 
-//app.use(express.static("public")); //静的ファイル
 app.set("view engine", "ejs"); //EJSテンプレートエンジン
 
 app.get("/", (req, res) => {
-    //console.log("hello express");
-    //res.send("<h1>こんにちは</h1>");
-    //res.sendStatus(404);
-    //res.status(500).send("エラーです");
-    //res.status(500).json({msg: "エラーです"})
-
     res.render("index", {text: "NodejsとExpress"});
 });
 
 //ルーティング
 app.use("/user", userRouter);
-//app.use("/auth", authRouter);
-//app.use("/customer", customerRouter);
-//app.use("/product", productRouter);
-
-//ミドルウェア
-//function mylogger(req, res, next) {
-//    console.log(req.originalUrl);
-//    next();
-//}
+app.use("/customer", customerRouter);
 
 app.listen(PORT, () => console.log("サーバが起動しました"));
