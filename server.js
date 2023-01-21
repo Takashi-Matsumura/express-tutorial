@@ -4,32 +4,13 @@ const userRouter = require("./routes/user");
 
 const PORT = 3000;
 
-//ロガーを挟む場所は、先頭へ
-//app.use(mylogger);
-
-//app.use(express.static("public")); //静的ファイル
 app.set("view engine", "ejs"); //EJSテンプレートエンジン
 
 app.get("/", (req, res) => {
-    //console.log("hello express");
-    //res.send("<h1>こんにちは</h1>");
-    //res.sendStatus(404);
-    //res.status(500).send("エラーです");
-    //res.status(500).json({msg: "エラーです"})
-
     res.render("index", {text: "NodejsとExpress"});
 });
 
 //ルーティング
 app.use("/user", userRouter);
-//app.use("/auth", authRouter);
-//app.use("/customer", customerRouter);
-//app.use("/product", productRouter);
-
-//ミドルウェア
-//function mylogger(req, res, next) {
-//    console.log(req.originalUrl);
-//    next();
-//}
 
 app.listen(PORT, () => console.log("サーバが起動しました"));
